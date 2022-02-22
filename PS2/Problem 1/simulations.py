@@ -5,6 +5,10 @@ def IVP():
     x = np.arange(0,L,dL)
     return u0/(1+np.exp(x - x0))
 
+def calcFP(u):
+    J = [[0, 1],[-rho + 2*rho/q*u + 1/(1+u)**2,-c]]
+    print('Trace: ' + (J[0,0] + J[1,1]))
+
 if __name__ == '__main__':
     #given
     rho = 0.5
@@ -54,8 +58,9 @@ if __name__ == '__main__':
     c = 1/(dt*(t2 - t1))
     print(c)
     
-    J = [[0, 1],[-rho + 2*rho/q*u0 + 1/(1+u0)**2,-c]]
-    print(J)
+    #Calc matrix
+    calcFP(0)
+    calcFP(u0)
 
     plt.figure()
     plt.subplot(121)
