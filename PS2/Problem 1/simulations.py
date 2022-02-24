@@ -27,10 +27,10 @@ if __name__ == '__main__':
     u_star_1 = (q-1)/2 + np.sqrt((q-1)**2/4 + q*(1-1/rho))  #Largest steady-state
     u_star_2 = (q-1)/2 - np.sqrt((q-1)**2/4 + q*(1-1/rho))  #2nd Largest steady-state
     L = 100
-    u0 = u_star_1
-    x0 = 20
+    u0 = 3*u_star_1
+    #x0 = 20
     #u0 = u_star_2
-    #x0 = 50
+    x0 = 50
     #u0 = 1.1*u_star_2
     #u0 = 3*u_star_1
 
@@ -52,8 +52,8 @@ if __name__ == '__main__':
     #initialize
     u = np.zeros((L,steps))
     du_dEps = np.zeros((L,1))
-    u[:,0] = IVP()
-    #u[:,0] = IVP2()
+    #u[:,0] = IVP()
+    u[:,0] = IVP2()
 
     for t in range(steps-1):
         for i in range(1,L-1):
@@ -94,8 +94,12 @@ if __name__ == '__main__':
     
     plt.figure()
     plt.plot(u[:,0])
+    plt.xlabel('\u03BE')
+    plt.ylabel('u')
     plt.figure()
     plt.plot(u[:,steps-1])
+    plt.xlabel('\u03BE')
+    plt.ylabel('u')
     
     plt.show()
 
