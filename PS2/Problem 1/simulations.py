@@ -12,7 +12,7 @@ def IVP2():
     return u0*np.exp(-(x - x0)**2)
 
 def calcFP(u):
-    J = np.array([[0, 1],[-rho + 2*rho/q*u + 1/(1+u)**2,-c]])
+    J = np.array([[0, 1],[-rho + 2*rho*u/q + 1/(1+u)**2,-c]])
     tr = J[0,0] + J[1,1]
     det = J[0,0]*J[1,1] - J[0,1]*J[1,0]
     limit = tr**2 - 4*det
@@ -27,11 +27,11 @@ if __name__ == '__main__':
     u_star_1 = (q-1)/2 + np.sqrt((q-1)**2/4 + q*(1-1/rho))  #Largest steady-state
     u_star_2 = (q-1)/2 - np.sqrt((q-1)**2/4 + q*(1-1/rho))  #2nd Largest steady-state
     L = 100
-    u0 = 3*u_star_1
+    #u0 = u_star_1
     #x0 = 20
     #u0 = u_star_2
     x0 = 50
-    #u0 = 1.1*u_star_2
+    u0 = 1.1*u_star_2
     #u0 = 3*u_star_1
 
     #user defined
@@ -39,10 +39,10 @@ if __name__ == '__main__':
     T = 120
     dt = 0.01
     steps = int(T/dt)
-    L_fix = 30
-    t_fix = int(50/dt)
-    #L_fix = 60
-    #t_fix = int(90/dt)
+    #L_fix = 30
+    #t_fix = int(50/dt)
+    L_fix = 60
+    t_fix = int(90/dt)
     t1 = 0
     t2 = 0
     u1 = 0
@@ -52,8 +52,8 @@ if __name__ == '__main__':
     #initialize
     u = np.zeros((L,steps))
     du_dEps = np.zeros((L,1))
-    #u[:,0] = IVP()
-    u[:,0] = IVP2()
+    u[:,0] = IVP()
+    #u[:,0] = IVP2()
 
     for t in range(steps-1):
         for i in range(1,L-1):
@@ -80,7 +80,7 @@ if __name__ == '__main__':
     
     #Calc matrix
     calcFP(0)
-    calcFP(u0)
+    calcFP(u_star_1)
 
     plt.figure()
     plt.subplot(121)
